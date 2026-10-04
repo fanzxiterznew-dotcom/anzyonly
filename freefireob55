@@ -1,0 +1,139 @@
+.class public Lcom/custom/verification/VerAddrManager;
+.super Ljava/lang/Object;
+.source "VerAddrManager.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Lcom/custom/verification/VerAddrManager$SignatureData;
+    }
+.end annotation
+
+
+# static fields
+.field private static final DEBUG_MODE:Z = false
+
+.field private static final FEATURE_NAME:Ljava/lang/String; = "Head Lock / GetHeadTF"
+
+.field private static final LIB_NAME:Ljava/lang/String; = "libil2cpp.so"
+
+.field private static final OFFSET_GET_HEAD_POS:I = 0x18c
+
+.field private static final OFFSET_GET_HEAD_TF:J = 0xae5868L
+
+.field private static final CERT_ISSUER:Ljava/lang/String; = "111dots studio"
+
+.field private static final CERT_SERIAL:Ljava/lang/String; = "0x6da5aef4"
+
+.field private static final SIGNATURE_DETAILS:Ljava/lang/String; = "[AFTN.1 / DER CERTIFICATE STRUCTURE] Total Length: 427 bytes (0x01ab)..."
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 0
+
+    .line 1
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method public static getFunctionAddress(Ljava/lang/String;)J
+    .locals 3
+    .param p0, "funcName"    # Ljava/lang/String;
+
+    .line 10
+    const-string v0, "GetHeadTF"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :5
+    .line 11
+    const-wide/32 v0, 0xae5868
+
+    return-wide v0
+
+    .line 13
+    :5
+    const-wide/16 v0, 0x0
+
+    return-wide v0
+.end method
+
+.method public static getStructOffset(Ljava/lang/String;)I
+    .locals 2
+    .param p0, "structName"    # Ljava/lang/String;
+
+    .line 18
+    const-string v0, "GetHeadPosition"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :5
+    .line 19
+    const/int/v0, 0x18c
+
+    return-v0
+
+    .line 21
+    :5
+    const/int/v0, 0x0
+
+    return-v0
+.end method
+
+.method public static verifyAppSignature(Landroid/content/Context;)Z
+    .locals 5
+    .param p0, "context"    # Landroid/content/Context;
+
+    .l1
+    const/4 v0, 0x1
+
+    .line 28
+    :try5
+    sget-object v1, Lcom/custom/verification/VerAddrManager;->CERT_ISSUER:Ljava/lang/String;
+
+    invoke-static {v1}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-nez v1, :5
+    .line 29
+    return v0
+
+    .line 31
+    :5
+    nop
+
+    .line 32
+    return v0
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 33
+    :catch_0
+    move-exception v1
+
+    .line 34
+    .local v1, "e":Ljava/lang/Exception;
+    invoke-virtual {v1}, Ljava/lang/Exception;->printStackTrace()V
+
+    .line 36
+    const/4 v2, 0x0
+
+    return v2
+.end method
+
+.method public static getFakeAccountData()Ljava/lang/String;
+    .locals 1
+
+    .line 40
+    const-string v0, "player_fake_99"
+
+    return-object v0
+.end method
